@@ -60,7 +60,7 @@
               <span class="mdl-layout-title">Configuração</span>
               <nav class="mdl-navigation">
                 <a class="mdl-navigation__link" href="alunos.jsp">Alunos</a>
-                <a class="mdl-navigation__link" href="professores.jsp">Professores</a>
+                <a class="mdl-navigation__link" href="professores.html">Professores</a>
                 <a class="mdl-navigation__link" href="disciplina.html">Disciplinas</a>
               </nav>
             </div>
