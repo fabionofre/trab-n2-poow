@@ -33,7 +33,7 @@ public class UnidadeImpl implements UnidadeDAO{
 
     public List<Unidade> getAll() {
         List<Unidade> unidades = new ArrayList<>();
-        String sql = "Select id, descricao from unidade";
+        String sql = "Select id, descricao from disciplina";
         try {
             stmt = conn.prepareStatement(sql);
             rs  = stmt.executeQuery();
