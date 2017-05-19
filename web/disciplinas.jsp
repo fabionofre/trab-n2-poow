@@ -4,73 +4,99 @@
     Author     : Laboratorio
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="servlets.DisciplinaCrud"%>
+<%@page import="controle.DisciplinaImpl"%>
+<%@page import="modelo.Disciplina"%>
 <%@page import="auxiliar.VariaveisGlobais"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
-    <%
-        VariaveisGlobais.tituloNavbar = "Disciplinas";
-    %>
     <body>
+            <%
+            VariaveisGlobais.tituloNavbar = "Disciplinas";
+            DisciplinaImpl dImpl = new DisciplinaImpl();
+            Disciplina dEdit = null;
+            Boolean modalEditar;
+            if(request.getParameter("modalOpen") != null){
+                String modalOpen = request.getParameter("modalOpen");
+                if(modalOpen.equals("false")){
+                    DisciplinaCrud.modalEditar = true;
+                    dEdit = dImpl.get(Integer.valueOf(request.getParameter("codigo")));
+                }else{
+                    DisciplinaCrud.modalEditar = false;
+                }
+            }else{
+                DisciplinaCrud.modalEditar = false;
+            }
+            List<Disciplina> disciplinas = dImpl.getAll();
+        %>
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-            <%@include file="navbar.jsp" %>
+            <%@include file="Componentes/navbar.jsp" %>
              <main class="mdl-layout__content">
                 <div class="page-content">
-                    <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp" style="position: absolute;left: 37%;top: 25%">
+                    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="position: absolute;left: 37%;top: 25%">
                         <thead>
                           <tr>
-                            <th>Nome</th>
-                            <th>A√ß√µes</th>
+                            <th>CÛdigo</th>
+                            <th style="text-align: center">Nome</th>
+                            <th>AÁıes</th>
                           </tr>
                         </thead>
                         <tbody>
+                            <% for(Disciplina d: disciplinas){%>
                             <tr>
-                              <td> Gestao de Projetos </td>
-                              <td><i class="material-icons" style="color: red">delete</i> <i class="material-icons" style="color: blue">create</i> </td>
-                            </tr> 
-                            <tr>
-                              <td> Padr√µes de Projetos</td>
-                              <td><i class="material-icons" style="color: red">delete</i> <i class="material-icons" style="color: blue">create</i> </td>
+                                <td><%=d.getCodigo()%></td>
+                                <td><%=d.getDescricao()%></td>
+                                <td><a href="disciplinaCrud?op=delete&codigo=<%=d.getCodigo()%>"><i class="material-icons" style="color: red">delete</i></a><a href="disciplinas.jsp?modalOpen=false&codigo=<%=d.getCodigo()%>" class="editButton"><i class="material-icons" style="color: blue">create</i></a></td>
                             </tr>
-                            <tr>
-                              <td> Legisla√ß√£o e √âtica</td>
-                              <td><i class="material-icons" style="color: red">delete</i> <i class="material-icons" style="color: blue">create</i> </td>
-                            </tr>
+                            <%}%>
                         </tbody>
                     </table>  
-                </div>
-        
+                </div> 
                 <button id="saveButton" style="position: absolute; top: 85%;left: 90%" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
                     <i class="material-icons">add</i>
                 </button>
             </main>                      
-        </div>
-        
+        </div>       
        <dialog id="dialog" class="mdl-dialog">
             <h3 class="mdl-dialog__title">Cadastro de Disciplinas</h3>
-            <form action="alunoCrud?op=post" method="post">
+            <form action="disciplinaCrud?op=post" method="post">
                 <div class="mdl-dialog__content">
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" type="text" required id="nome" name="nome">
-                            <label class="mdl-textfield__label" for="nome">Nome</label>
-                        </div>
-                       
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" required type="text" id="login" name="login">
-                            <label class="mdl-textfield__label" for="login">Descri√ß√£o</label>
-                        </div>
-                        <div class="mdl-selectfield">
-                            <label>Unidade</label>
-                            <select class="browser-default" name="unidade">
-                            </select>
-                        </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" required id="codigo" name="codigo">
+                        <label class="mdl-textfield__label" for="nome">CÛdigo</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" required id="descricao" name="descricao">
+                        <label class="mdl-textfield__label" for="descricao">Nome</label>
+                    </div>
                 </div>
                 <div class="mdl-dialog__actions">
                     <button type="submit" class="mdl-button">Salvar</button>
                 </div>
             </form>
         </dialog>
-        
+        <% if(DisciplinaCrud.modalEditar) { %>
+        <dialog id="dialogEdit" class="mdl-dialog">
+            <h3 class="mdl-dialog__title">Editar Disciplina</h3>
+            <form action="disciplinaCrud?op=put&codigoantigo=<%=dEdit.getCodigo()%>" method="post">
+                <div class="mdl-dialog__content">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" value="<%=dEdit.getCodigo()%>" type="text" id="codigo" name="codigo">
+                        <label class="mdl-textfield__label" for="codigo">CÛdigo</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" value="<%=dEdit.getDescricao()%>" type="text" id="descricao" name="descricao">
+                        <label class="mdl-textfield__label" for="descricao">Nome</label>
+                    </div>
+                </div>
+                <div class="mdl-dialog__actions">
+                    <button type="submit" class="mdl-button">Salvar</button>
+                </div>
+            </form>
+        </dialog>
+        <% } %>
         <script type="text/javascript">
             (function() {
                 'use strict';
@@ -92,9 +118,6 @@
                   dialog.close();
                 });               
             }());
-        </script>
-
-
-        
+        </script>   
     </body>
 </html>

@@ -13,10 +13,10 @@
     %>
     <body>
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-            <%@include file="navbar.jsp" %>
+            <%@include file="Componentes/navbar.jsp"%>
             <main class="mdl-layout__content">
                 <div class="page-content">
-                    <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp" style="position: absolute;left: 37%;top: 25%">
+                    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="position: absolute;left: 37%;top: 25%">
                         <thead>
                           <tr>
                             <th>Nome</th>

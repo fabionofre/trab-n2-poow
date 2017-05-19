@@ -15,9 +15,9 @@ import modelo.Disciplina;
 public interface DisciplinaDAO {
     
     public List<Disciplina> getAll();
-    public Disciplina get(Integer id);
-    public void put(Disciplina d);
-    public void delete(Integer id);
+    public Disciplina get(Integer codigo);
+    public void put(Disciplina d, Integer codigo);
+    public void delete(Integer codigo);
     public void post(Disciplina d);
        
 }

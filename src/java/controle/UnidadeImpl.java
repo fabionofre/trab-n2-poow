@@ -30,10 +30,11 @@ public class UnidadeImpl implements UnidadeDAO{
     public UnidadeImpl() throws ClassNotFoundException {
         this.conn = ConnectionFactory.getConnection();
     }
-
+    
+    @Override
     public List<Unidade> getAll() {
         List<Unidade> unidades = new ArrayList<>();
-        String sql = "Select id, descricao from disciplina";
+        String sql = "Select id, descricao from unidade";
         try {
             stmt = conn.prepareStatement(sql);
             rs  = stmt.executeQuery();
@@ -48,7 +49,7 @@ public class UnidadeImpl implements UnidadeDAO{
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UnidadeImpl.class.getName()).log(Level.SEVERE, null, ex);
             ex.printStackTrace();
         }
         return unidades;
@@ -78,7 +79,7 @@ public class UnidadeImpl implements UnidadeDAO{
             stmt.execute();
             
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UnidadeImpl.class.getName()).log(Level.SEVERE, null, ex);
             ex.printStackTrace();
         }
     }
