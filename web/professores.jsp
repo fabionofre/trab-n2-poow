@@ -1,4 +1,4 @@
-<%-- 
+    <%-- 
     Document   : professores.jsp
     Created on : 18/05/2017, 21:22:27
     Author     : Laboratorio
@@ -20,12 +20,14 @@
                         <thead>
                           <tr>
                             <th>Nome</th>
+                            <th>Curso</th>
                             <th>Ações</th>
                           </tr>
                         </thead>
                         <tbody>
                             <tr>
-                              <td>  </td>
+                              <td></td>
+                              <td></td>
                               <td><i class="material-icons" style="color: red">delete</i> <i class="material-icons" style="color: blue">create</i> </td>
                             </tr> 
                         </tbody>

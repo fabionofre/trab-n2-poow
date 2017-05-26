@@ -53,8 +53,11 @@ public class AlunoCrud extends HttpServlet {
             u.setLogin(request.getParameter("login"));
             u.setSenha(request.getParameter("senha"));
             u.getUnidade().setId(Integer.valueOf(request.getParameter("unidade")));
+            Integer idCurso = Integer.valueOf(request.getParameter("curso"));
             
-            uImpl.post(u);
+            uImpl.post(u, idCurso);
+            
+            
             
         }else if(operacao.equals("put")){
             Usuario u = new Usuario();

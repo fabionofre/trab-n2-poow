@@ -39,6 +39,7 @@
             <%@include file="Componentes/navbar.jsp" %>
             <main class="mdl-layout__content">
                 <div class="page-content">
+                    <% if(!usuarios.isEmpty()) { %>
                     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="position: absolute;left: 37%;top: 25%">
                         <thead>
                           <tr>
@@ -56,7 +57,8 @@
                             </tr> 
                           <%}%>
                         </tbody>
-                    </table>  
+                    </table>
+                    <% } %>
                 </div>
                 <button id="saveButton" style="position: absolute; top: 85%;left: 90%" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
                     <i class="material-icons">add</i>
@@ -93,6 +95,13 @@
                                 <%
                                     }
                                 %>
+                            </select>
+                        </div>
+                        <div class="mdl-selectfield">
+                            <label>Curso</label>
+                            <select class="browser-default" name="curso">
+                                <option value="1">Sistemas de Informação</option>
+                                <option value="2">Redes</option>
                             </select>
                         </div>
                 </div>

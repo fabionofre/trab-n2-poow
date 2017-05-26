@@ -11,12 +11,40 @@ package modelo;
  */
 public class UsuarioCurso {
     
-    private int idUsuario;
+    private long idUsuario;
     private int idCurso;
     
-    public UsuarioCurso(int idUsuario, int idCurso){
+    public UsuarioCurso(long idUsuario, int idCurso){
         
         this.idUsuario = idUsuario;
+        this.idCurso = idCurso;
+    }
+
+    /**
+     * @return the idUsuario
+     */
+    public long getIdUsuario() {
+        return idUsuario;
+    }
+
+    /**
+     * @param idUsuario the idUsuario to set
+     */
+    public void setIdUsuario(long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    /**
+     * @return the idCurso
+     */
+    public int getIdCurso() {
+        return idCurso;
+    }
+
+    /**
+     * @param idCurso the idCurso to set
+     */
+    public void setIdCurso(int idCurso) {
         this.idCurso = idCurso;
     }
     

@@ -23,6 +23,8 @@ public class Main {
         UnidadeImpl unidadeImpl = new UnidadeImpl();
         
         Unidade unidade = new Unidade();
+        unidade.setDescricao("UNINORTE");
+        //unidadeImpl.post(unidade);
         
         Usuario u = new Usuario();
          /*

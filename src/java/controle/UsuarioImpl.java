@@ -16,6 +16,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Usuario;
 import dao.UsuarioDAO;
+import java.sql.Statement;
+import modelo.UsuarioCurso;
 
 /**
  *
@@ -122,17 +124,30 @@ public class UsuarioImpl implements UsuarioDAO {
     }
 
     @Override
-    public void post(Usuario u) {
+    public void post(Usuario u, Integer idCurso) {
         String sql = "INSERT INTO usuario (nome, sobrenome, login, senha, id_unidade) VALUES(?,?,?,?,?)";
         try {
-            stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, u.getNome());
             stmt.setString(2, u.getSobrenome());
             stmt.setString(3, u.getLogin());
             stmt.setString(4, u.getSenha());
             stmt.setInt(5, u.getUnidade().getId());
+            stmt.executeUpdate();
             
-            stmt.execute();
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                long idUsuario = 0;
+                if (generatedKeys.next()) {
+                    idUsuario = generatedKeys.getLong(1);
+                }
+                else {
+                    throw new SQLException("Creating user failed, no ID obtained.");
+                }
+                UsuarioCursoImpl uCursoImpl = new UsuarioCursoImpl();
+                UsuarioCurso uC = new UsuarioCurso(idUsuario, idCurso);
+                uCursoImpl.post(uC);
+        }
+            
             
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioImpl.class.getName()).log(Level.SEVERE, null, ex);

@@ -18,6 +18,6 @@ public interface UsuarioDAO {
     public Usuario get(Integer id);
     public void put(Usuario u);
     public void delete(Integer id);
-    public void post(Usuario u);
+    public void post(Usuario u, Integer idCurso);
     
 }

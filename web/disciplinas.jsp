@@ -35,6 +35,7 @@
             <%@include file="Componentes/navbar.jsp" %>
              <main class="mdl-layout__content">
                 <div class="page-content">
+                    <% if(!disciplinas.isEmpty()) { %>
                     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="position: absolute;left: 37%;top: 25%">
                         <thead>
                           <tr>
@@ -52,7 +53,8 @@
                             </tr>
                             <%}%>
                         </tbody>
-                    </table>  
+                    </table>
+                    <% } %>
                 </div> 
                 <button id="saveButton" style="position: absolute; top: 85%;left: 90%" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
                     <i class="material-icons">add</i>
@@ -70,6 +72,17 @@
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                         <input class="mdl-textfield__input" type="text" required id="descricao" name="descricao">
                         <label class="mdl-textfield__label" for="descricao">Nome</label>
+                    </div>
+                    <div class="mdl-selectfield">
+                        <label>Ministrada por</label>
+                        <select class="browser-default" name="unidade">
+                            <% //for(Professor p: professores){
+                            %>
+                            <option value="<//%=p.getId()%>"><//%=p.getDescricao()%></option>
+                            <%
+                                //}
+                            %>
+                        </select>
                     </div>
                 </div>
                 <div class="mdl-dialog__actions">
