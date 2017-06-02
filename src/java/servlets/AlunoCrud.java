@@ -40,40 +40,38 @@ public class AlunoCrud extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         
+        Integer idCurso = 1;
         String operacao = request.getParameter("op");
         UsuarioImpl uImpl = new UsuarioImpl();
+        Usuario u = new Usuario();
         
         if(operacao.equals("delete")){           
             uImpl.delete(Integer.valueOf(request.getParameter("id")));
         }else if(operacao.equals("post")){
-            
-            Usuario u = new Usuario();
             u.setNome(request.getParameter("nome"));
             u.setSobrenome(request.getParameter("sobrenome"));
             u.setLogin(request.getParameter("login"));
             u.setSenha(request.getParameter("senha"));
             u.getUnidade().setId(Integer.valueOf(request.getParameter("unidade")));
-            Integer idCurso = Integer.valueOf(request.getParameter("curso"));
-            
-            uImpl.post(u, idCurso, 1);
-            
-            
-            
+            idCurso = Integer.valueOf(request.getParameter("curso"));
             
         }else if(operacao.equals("put")){
-            Usuario u = new Usuario();
             u.setId(Integer.valueOf(request.getParameter("id")));
             u.setNome(request.getParameter("nome"));
             u.setSobrenome(request.getParameter("sobrenome"));
             u.setLogin(request.getParameter("login"));
             u.setSenha(request.getParameter("senha"));
             u.getUnidade().setId(Integer.valueOf(request.getParameter("unidade")));
-            
             uImpl.put(u);
         }
         
-        response.sendRedirect("alunos.jsp");
-        
+        if(request.getParameter("fu").equals("aluno")){
+            uImpl.post(u, idCurso, 1);
+            response.sendRedirect("alunos.jsp");
+        }else if(request.getParameter("fu").equals("prof")){
+            uImpl.post(u, idCurso, 2);
+            response.sendRedirect("professores.jsp");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

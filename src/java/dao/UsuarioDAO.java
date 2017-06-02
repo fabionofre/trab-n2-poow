@@ -14,7 +14,7 @@ import modelo.Usuario;
  */
 public interface UsuarioDAO {
     
-    public List<Usuario> getAll();
+    public List<Usuario> getAll(Integer funcao);
     public Usuario get(Integer id);
     public void put(Usuario u);
     public void delete(Integer id);

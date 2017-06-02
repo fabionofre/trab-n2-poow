@@ -35,9 +35,9 @@ public class UsuarioImpl implements UsuarioDAO {
     }
 
     @Override
-    public List getAll() {  
+    public List getAll(Integer funcao) {  
         List<Usuario> usuarios = new ArrayList<>();
-        String sql = "Select id, nome, sobrenome, login, senha, id_unidade from usuario";
+        String sql = "SELECT id, nome, sobrenome, login, id_unidade FROM usuario u, usuario_funcao  ufuncao where u.id = ufuncao.id_usuario and ufuncao.id_funcao="+funcao;
         try {
             stmt = conn.prepareStatement(sql);
             rs  = stmt.executeQuery();
@@ -48,8 +48,7 @@ public class UsuarioImpl implements UsuarioDAO {
                 u.setNome(rs.getString(2));
                 u.setSobrenome(rs.getString(3));
                 u.setLogin(rs.getString(4));
-                u.setSenha(rs.getString(5));
-                u.getUnidade().setId(rs.getInt(6));
+                u.getUnidade().setId(rs.getInt(5));
                 
                 usuarios.add(u);
             }

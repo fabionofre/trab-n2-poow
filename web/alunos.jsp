@@ -32,7 +32,7 @@
             }else{
                 AlunoCrud.modalEditar = false;
             }
-            List<Usuario> usuarios = uImpl.getAll();
+            List<Usuario> usuarios = uImpl.getAll(1);
             List<Unidade> unidades = unImpl.getAll();
         %>
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -53,7 +53,7 @@
                             <tr>
                               <td><%=u.getNome()%></td>
                               <td><%=u.getSobrenome()%></td>
-                              <td><a href="alunoCrud?op=delete&id=<%=u.getId()%>"><i class="material-icons" style="color: red">delete</i></a><a href="alunos.jsp?modalOpen=false&id=<%=u.getId()%>" class="editButton"><i class="material-icons" style="color: blue">create</i></a><td>
+                              <td><a href="alunoCrud?op=delete&id=<%=u.getId()%>&fu=aluno"><i class="material-icons" style="color: red">delete</i></a><a href="alunos.jsp?modalOpen=false&id=<%=u.getId()%>" class="editButton"><i class="material-icons" style="color: blue">create</i></a><td>
                             </tr> 
                           <%}%>
                         </tbody>
@@ -68,7 +68,7 @@
         <!-- Conteúdo do modal salvar -->
         <dialog id="dialog" class="mdl-dialog">
             <h3 class="mdl-dialog__title">Cadastro de Alunos</h3>
-            <form action="alunoCrud?op=post" method="post">
+            <form action="alunoCrud?op=post&fu=aluno" method="post">
                 <div class="mdl-dialog__content">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <input class="mdl-textfield__input" type="text" required id="nome" name="nome">
@@ -114,7 +114,7 @@
         <% if(AlunoCrud.modalEditar) { %>
         <dialog id="dialogEdit" class="mdl-dialog">
             <h3 class="mdl-dialog__title">Editar Aluno</h3>
-            <form action="alunoCrud?op=put&id=<%=uEdit.getId()%>" method="post">
+            <form action="alunoCrud?op=put&id=<%=uEdit.getId()%>&fu=aluno" method="post">
                 <div class="mdl-dialog__content">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <input class="mdl-textfield__input" value="<%=uEdit.getNome()%>" type="text" id="nome" name="nome">

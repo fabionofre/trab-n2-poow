@@ -1,4 +1,9 @@
-    <%-- 
+    <%@page import="controle.UnidadeImpl"%>
+<%@page import="modelo.Unidade"%>
+<%@page import="modelo.Usuario"%>
+<%@page import="java.util.List"%>
+<%@page import="controle.UsuarioImpl"%>
+<%-- 
     Document   : professores.jsp
     Created on : 18/05/2017, 21:22:27
     Author     : Laboratorio
@@ -10,12 +15,17 @@
 <html>
     <%
         VariaveisGlobais.tituloNavbar = "Professores";
+        UsuarioImpl uImpl = new UsuarioImpl();
+        UnidadeImpl unImpl = new UnidadeImpl();
+        List<Usuario> usuarios = uImpl.getAll(2);
+        List<Unidade> unidades = unImpl.getAll();
     %>
     <body>
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
             <%@include file="Componentes/navbar.jsp"%>
             <main class="mdl-layout__content">
                 <div class="page-content">
+                    <% if(!usuarios.isEmpty()) { %>
                     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="position: absolute;left: 37%;top: 25%">
                         <thead>
                           <tr>
@@ -25,13 +35,16 @@
                           </tr>
                         </thead>
                         <tbody>
+                            <% for(Usuario u: usuarios){%>
                             <tr>
-                              <td></td>
+                              <td><%=u.getNome()%></td>
                               <td></td>
                               <td><i class="material-icons" style="color: red">delete</i> <i class="material-icons" style="color: blue">create</i> </td>
                             </tr> 
+                            <% } %>
                         </tbody>
-                    </table>  
+                    </table>
+                    <% } %>
                 </div>
                     <button id="saveButton" style="position: absolute; top: 85%;left: 90%" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
                         <i class="material-icons">add</i>
@@ -39,7 +52,7 @@
                  </main>  
             <dialog id="dialog" class="mdl-dialog">
             <h3 class="mdl-dialog__title">Cadastro de Professores</h3>
-            <form action="alunoCrud?op=post" method="post">
+            <form action="alunoCrud?op=post&fu=prof" method="post">
                 <div class="mdl-dialog__content">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <input class="mdl-textfield__input" type="text" required id="nome" name="nome">
@@ -47,20 +60,33 @@
                         </div>
                        
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" required type="text" id="login" name="login">
-                            <label class="mdl-textfield__label" for="login">Sobrenome</label>
+                            <input class="mdl-textfield__input" required type="text" id="sobrenome" name="sobrenome">
+                            <label class="mdl-textfield__label" for="sobrenome">Sobrenome</label>
                         </div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <input class="mdl-textfield__input" required type="text" id="login" name="login">
                             <label class="mdl-textfield__label" for="login">Login</label>
                         </div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" required type="text" id="login" name="login">
-                            <label class="mdl-textfield__label" for="login">Senha</label>
+                            <input class="mdl-textfield__input" required type="password" id="senha" name="senha">
+                            <label class="mdl-textfield__label" for="senha">Senha</label>
                         </div>
                         <div class="mdl-selectfield">
                             <label>Unidade</label>
                             <select class="browser-default" name="unidade">
+                                <% for(Unidade un: unidades){
+                                %>
+                                <option value="<%=un.getId()%>"><%=un.getDescricao()%></option>
+                                <%
+                                    }
+                                %>
+                            </select>
+                        </div>
+                        <div class="mdl-selectfield">
+                            <label>Curso</label>
+                            <select class="browser-default" name="curso">
+                                <option value="1">Sistemas de Informação</option>
+                                <option value="2">Redes</option>
                             </select>
                         </div>
                 </div>
