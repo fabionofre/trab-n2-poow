@@ -11,14 +11,28 @@ package modelo;
  */
 public class UsuarioFuncao {
     
-    private int idUsuario;
+    private long idUsuario;
     private int idFuncao;
     
-    public UsuarioFuncao(int idUsuario, int idFuncao){
+    public UsuarioFuncao(long idUsuario, int idFuncao){
         
         this.idUsuario = idUsuario;
         this.idFuncao = idFuncao;
         
+    }
+
+    /**
+     * @return the idUsuario
+     */
+    public long getIdUsuario() {
+        return idUsuario;
+    }
+
+    /**
+     * @return the idFuncao
+     */
+    public int getIdFuncao() {
+        return idFuncao;
     }
     
 }

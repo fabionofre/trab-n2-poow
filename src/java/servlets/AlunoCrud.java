@@ -55,7 +55,8 @@ public class AlunoCrud extends HttpServlet {
             u.getUnidade().setId(Integer.valueOf(request.getParameter("unidade")));
             Integer idCurso = Integer.valueOf(request.getParameter("curso"));
             
-            uImpl.post(u, idCurso);
+            uImpl.post(u, idCurso, 1);
+            
             
             
             

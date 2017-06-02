@@ -6,7 +6,7 @@
 package controle;
 
 import dao.ConnectionFactory;
-import dao.UsuarioCursoDAO;
+import dao.UsuarioFuncaoDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,34 +14,34 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import modelo.UsuarioCurso;
+import modelo.UsuarioFuncao;
 
 /**
  *
  * @author Laboratorio
  */
-public class UsuarioCursoImpl implements UsuarioCursoDAO {
+public class UsuarioFuncaoImpl implements UsuarioFuncaoDAO{
     
     Connection conn;
     PreparedStatement stmt;
     ResultSet rs;
     
-    public UsuarioCursoImpl() throws ClassNotFoundException {
+    public UsuarioFuncaoImpl() throws ClassNotFoundException {
         this.conn = ConnectionFactory.getConnection();
     }
 
     @Override
-    public List<UsuarioCurso> getAll() {
+    public List<UsuarioFuncao> getAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public UsuarioCurso get(Integer id) {
+    public UsuarioFuncao get(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void put(UsuarioCurso uC) {
+    public void put(UsuarioFuncao uF) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -51,21 +51,18 @@ public class UsuarioCursoImpl implements UsuarioCursoDAO {
     }
 
     @Override
-    public void post(UsuarioCurso uC) {       
-        String sql = "INSERT INTO usuario_curso (id_usuario, id_curso) VALUES(?,?)";
+    public void post(UsuarioFuncao uF) {
+        String sql = "INSERT INTO usuario_funcao (id_usuario, id_funcao) VALUES(?,?)";
         try {       
             stmt = conn.prepareStatement(sql);
-            stmt.setLong(1, uC.getIdUsuario());
-            stmt.setInt(2, uC.getIdCurso());
+            stmt.setLong(1, uF.getIdUsuario());
+            stmt.setInt(2, uF.getIdFuncao());
             stmt.execute();
             
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioCursoImpl.class.getName()).log(Level.SEVERE, null, ex);
             ex.printStackTrace();
         }
-        
     }
-
-    
     
 }
