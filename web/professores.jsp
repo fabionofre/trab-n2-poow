@@ -30,7 +30,7 @@
                         <thead>
                           <tr>
                             <th>Nome</th>
-                            <th>Curso</th>
+                            <th>Sobrenome</th>
                             <th>Ações</th>
                           </tr>
                         </thead>
@@ -38,8 +38,8 @@
                             <% for(Usuario u: usuarios){%>
                             <tr>
                               <td><%=u.getNome()%></td>
-                              <td></td>
-                              <td><i class="material-icons" style="color: red">delete</i> <i class="material-icons" style="color: blue">create</i> </td>
+                              <td><%=u.getSobrenome()%></td>
+                              <td><i class="material-icons" style="color: #B22222">delete</i> <i class="material-icons" style="color: #6495ED">create</i> </td>
                             </tr> 
                             <% } %>
                         </tbody>

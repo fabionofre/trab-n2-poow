@@ -53,7 +53,7 @@
                             <tr>
                               <td><%=u.getNome()%></td>
                               <td><%=u.getSobrenome()%></td>
-                              <td><a href="alunoCrud?op=delete&id=<%=u.getId()%>&fu=aluno"><i class="material-icons" style="color: red">delete</i></a><a href="alunos.jsp?modalOpen=false&id=<%=u.getId()%>" class="editButton"><i class="material-icons" style="color: blue">create</i></a><td>
+                              <td><a href="alunoCrud?op=delete&id=<%=u.getId()%>&fu=aluno"><i class="material-icons" style="color: #B22222">delete</i></a><a href="alunos.jsp?modalOpen=false&id=<%=u.getId()%>" class="editButton"><i class="material-icons" style="color: #6495ED">create</i></a><td>
                             </tr> 
                           <%}%>
                         </tbody>
@@ -127,10 +127,6 @@
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <input class="mdl-textfield__input" value="<%=uEdit.getLogin()%>" type="text" id="login" name="login">
                             <label class="mdl-textfield__label" for="login">Login</label>
-                        </div>
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" value="<%=uEdit.getSenha()%>" type="text" id="senha" name="senha">
-                            <label class="mdl-textfield__label" for="senha">Senha</label>
                         </div>
                         <div class="mdl-selectfield">
                             <label>Unidade</label>

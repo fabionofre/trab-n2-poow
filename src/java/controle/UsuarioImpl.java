@@ -37,7 +37,7 @@ public class UsuarioImpl implements UsuarioDAO {
     @Override
     public List getAll(Integer funcao) {  
         List<Usuario> usuarios = new ArrayList<>();
-        String sql = "SELECT id, nome, sobrenome, login, id_unidade FROM usuario u, usuario_funcao  ufuncao where u.id = ufuncao.id_usuario and ufuncao.id_funcao="+funcao;
+        String sql = "SELECT id, nome, sobrenome, login, id_unidade FROM usuario u, usuario_funcao  ufuncao WHERE u.ativo = 1 AND u.id = ufuncao.id_usuario and ufuncao.id_funcao="+funcao;
         try {
             stmt = conn.prepareStatement(sql);
             rs  = stmt.executeQuery();
@@ -63,7 +63,7 @@ public class UsuarioImpl implements UsuarioDAO {
     @Override
     public Usuario get(Integer id) {
                String sql = "SELECT u.id, u.nome, u.sobrenome, u.login, u.senha, un.id, un.descricao FROM usuario u, unidade un"
-                + " WHERE u.id_unidade = un.id AND u.id = ?";
+                + " WHERE u.id_unidade = un.id AND u.id = ? AND u.ativo = 1";
         Usuario u = new Usuario();
         try {
             stmt = conn.prepareStatement(sql);
@@ -91,15 +91,14 @@ public class UsuarioImpl implements UsuarioDAO {
 
     @Override
     public void put(Usuario u) {
-        String sql = "UPDATE usuario set nome = ?, sobrenome = ?, login = ?, senha = ?, id_unidade = ? WHERE id = ?";
+        String sql = "UPDATE usuario set nome = ?, sobrenome = ?, login = ?, id_unidade = ? WHERE id = ?";
             try {
                 stmt = conn.prepareStatement(sql);
                 stmt.setString(1, u.getNome());
                 stmt.setString(2, u.getSobrenome());
                 stmt.setString(3, u.getLogin());
-                stmt.setString(4, u.getSenha());
-                stmt.setInt(5, u.getUnidade().getId());
-                stmt.setInt(6, u.getId());
+                stmt.setInt(4, u.getUnidade().getId());
+                stmt.setInt(5, u.getId());
 
                 stmt.execute();
             } catch (SQLException ex) {
@@ -110,7 +109,7 @@ public class UsuarioImpl implements UsuarioDAO {
 
     @Override
     public void delete(Integer id) {
-        String sql = "DELETE FROM usuario WHERE id = ?";
+        String sql = "UPDATE usuario SET ativo = 0 where id = ?";
         try {
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, id);
@@ -125,7 +124,7 @@ public class UsuarioImpl implements UsuarioDAO {
 
     @Override
     public void post(Usuario u, Integer idCurso, Integer idFuncao) {
-        String sql = "INSERT INTO usuario (nome, sobrenome, login, senha, id_unidade) VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO usuario (nome, sobrenome, login, senha, id_unidade, ativo) VALUES(?,?,?,sha2(?,224),?, 1)";
         long idUsuario = 0;
         try {
             stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);

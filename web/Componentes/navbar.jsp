@@ -15,6 +15,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
+        <link rel="shortcut icon" href="\trab-n2-poow\Imagens\perfil1.png" />
         <title>WebAulas</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
@@ -31,7 +32,7 @@ and open the template in the editor.
         <div class="mdl-layout-spacer"></div>
         <!-- Navigation. We hide it in small screens. -->
         <nav class="mdl-navigation mdl-layout--large-screen-only">
-          <a class="mdl-navigation__link" href="">Foto</a>
+          <a class="mdl-navigation__link" href=""><img src="\trab-n2-poow\Imagens\Koala.jpg" width="40px"/></a>
           <a class="mdl-navigation__link" href="">Menu</a>
         </nav>
       </div>
@@ -39,6 +40,7 @@ and open the template in the editor.
     <div class="mdl-layout__drawer">
       <span class="mdl-layout-title">Configuração</span>
       <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" href="index.html">Home</a>
         <a class="mdl-navigation__link" href="alunos.jsp">Alunos</a>
         <a class="mdl-navigation__link" href="professores.jsp">Professores</a>
         <a class="mdl-navigation__link" href="disciplinas.jsp">Disciplinas</a>

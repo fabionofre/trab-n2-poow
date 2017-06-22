@@ -4,6 +4,8 @@
     Author     : Laboratorio
 --%>
 
+<%@page import="controle.UsuarioImpl"%>
+<%@page import="modelo.Usuario"%>
 <%@page import="java.util.List"%>
 <%@page import="servlets.DisciplinaCrud"%>
 <%@page import="controle.DisciplinaImpl"%>
@@ -29,7 +31,9 @@
             }else{
                 DisciplinaCrud.modalEditar = false;
             }
+            UsuarioImpl uImpl = new UsuarioImpl();
             List<Disciplina> disciplinas = dImpl.getAll();
+            List<Usuario> professores = uImpl.getAll(2);
         %>
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
             <%@include file="Componentes/navbar.jsp" %>
@@ -49,7 +53,7 @@
                             <tr>
                                 <td><%=d.getCodigo()%></td>
                                 <td><%=d.getDescricao()%></td>
-                                <td><a href="disciplinaCrud?op=delete&codigo=<%=d.getCodigo()%>"><i class="material-icons" style="color: red">delete</i></a><a href="disciplinas.jsp?modalOpen=false&codigo=<%=d.getCodigo()%>" class="editButton"><i class="material-icons" style="color: blue">create</i></a></td>
+                                <td><a href="disciplinaCrud?op=delete&codigo=<%=d.getCodigo()%>"><i class="material-icons" style="color: #B22222">delete</i></a><a href="disciplinas.jsp?modalOpen=false&codigo=<%=d.getCodigo()%>" class="editButton"><i class="material-icons" style="color: #6495ED">create</i></a></td>
                             </tr>
                             <%}%>
                         </tbody>
@@ -76,11 +80,11 @@
                     <div class="mdl-selectfield">
                         <label>Ministrada por</label>
                         <select class="browser-default" name="unidade">
-                            <% //for(Professor p: professores){
+                            <% for(Usuario p: professores){
                             %>
-                            <option value="<//%=p.getId()%>"><//%=p.getDescricao()%></option>
+                            <option value="<%=p.getId()%>"><%=p.getNome()+" "+p.getSobrenome()%></option>
                             <%
-                                //}
+                                }
                             %>
                         </select>
                     </div>
